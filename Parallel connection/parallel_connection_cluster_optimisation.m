@@ -87,12 +87,19 @@ new_ele_config = OptimiseSeriesSpringElements(umax, uneed, k, n_spring);%new con
 %element present before
 k_old_ele = SpringElementStiffness(Ke(ele_index));
 k_new_ele = SpringElementStiffness(new_ele_config(1));
-Ke(ele_index) = k_new_ele;
+Ke(ele_index) = new_ele_config(1);
 K = K-SpringAssemble(zeros(n), k_old_ele, ele_node(ele_index, 1), ele_node(ele_index, 2));
 K = SpringAssemble(K, k_new_ele, ele_node(ele_index, 1), ele_node(ele_index, 2));
 
-n_spring = n_spring - new_ele_config(2);%final quantity of extra springs left
-
+n_spring = n_spring - (new_ele_config(2)-1);%minus one because the function
+                                            %returns the total spring
+                                            %elements required consedring
+                                            %zero elements initially %but
+                                            %we already have one in the
+                                            %start
+                                            %additional one spring is added
+                                            %for tolerance
+                                            
 %run the simulation in a loop until the whole is optimised
 
 %==========================================================================
