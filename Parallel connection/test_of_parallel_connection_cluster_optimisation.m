@@ -8,9 +8,9 @@
 %All springs here have same physical properties %assumption
 %==========================================================================
 k = 1;%stiffness of a single spring
-e = 2;%number of elements
 n = 3;%number of nodes
 ele_node = [1 2; 2 3];%matrix of node numbering for elements from 1 to e
+e = length(ele_node(:, 1));%number of elements
 Ke = zeros(e, 1) + k;%initialising matrix to store element stiffness equal to k each
 K = zeros(n);%initialising the global stiffness matrix
 F_known = [0; 2; nan];%matrix of nodal forces %0 values are unknowns %nan are known but equal to zero
@@ -33,7 +33,6 @@ index_fknown = find(F_known);
 index_fzero = find(~F_zero);
 ftemp_len = length(index_fknown);
 f_temp = zeros(ftemp_len, 1);
-
 var = 1;
 for i = 1:n
     if F_known(i)~=0 && F_zero(i)~=0
