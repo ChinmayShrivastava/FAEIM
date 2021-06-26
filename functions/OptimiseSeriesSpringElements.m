@@ -10,7 +10,8 @@ function y = OptimiseSeriesSpringElements(umax, uneed, k, n)
 e_ideal = round(uneed/umax) + 1;%additional element for tolerance
 k_required = k/e_ideal;%required equivalent stiffness
 
-%returning the final equivalent stiffness and number of additional elements required
+%returning the final equivalent stiffness and number elements required in
+%the series connection
 if n>=e_ideal
     y = [k_required, e_ideal];
 else
