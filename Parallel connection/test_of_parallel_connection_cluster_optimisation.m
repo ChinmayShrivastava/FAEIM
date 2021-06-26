@@ -8,9 +8,9 @@
 %All springs here have same physical properties %assumption
 %==========================================================================
 k = 1;%stiffness of a single spring
-e = 3;%number of elements
+e = 2;%number of elements
 n = 3;%number of nodes
-ele_node = [1 2; 2 3; 1 3];%matrix of node numbering for elements from 1 to e
+ele_node = [1 2; 2 3];%matrix of node numbering for elements from 1 to e
 Ke = zeros(e, 1) + k;%initialising matrix to store element stiffness equal to k each
 K = zeros(n);%initialising the global stiffness matrix
 F_known = [0; 2; nan];%matrix of nodal forces %0 values are unknowns %nan are known but equal to zero
@@ -82,11 +82,18 @@ new_ele_config = OptimiseSeriesSpringElements(umax, uneed, k, n_spring);
 
 k_old_ele = SpringElementStiffness(Ke(ele_index));
 k_new_ele = SpringElementStiffness(new_ele_config(1));
-Ke(ele_index) = k_new_ele;
+Ke(ele_index) = new_ele_config(1);
 K = K-SpringAssemble(zeros(n), k_old_ele, ele_node(ele_index, 1), ele_node(ele_index, 2));
 K = SpringAssemble(K, k_new_ele, ele_node(ele_index, 1), ele_node(ele_index, 2));
 
-n_spring = n_spring - new_ele_config(2);
+n_spring = n_spring - (new_ele_config(2)-1);%minus one because the function
+                                            %returns the total spring
+                                            %elements required consedring
+                                            %zero elements initially %but
+                                            %we already have one in the
+                                            %start
+                                            %additional one spring is added
+                                            %for tolerance
 
 %run the simulation in a loop until the whole is optimised
 
