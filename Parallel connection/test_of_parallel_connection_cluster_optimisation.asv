@@ -80,11 +80,10 @@ ele_index = U_check(1);
 uneed = Fe(ele_index)/k(ele_index);
 new_ele_config = OptimiseSeriesSpringElements(umax, uneed, k, n_spring);
 
-k_old_ele = SpringElementStiffness(Ke(ele_index));
-k_new_ele = SpringElementStiffness(new_ele_config(1));
-Ke(ele_index) = k_new_ele;
+k_old_ele = SpringElementStiffness(K(ele_index));
+k_new_ele = S
 K = K-SpringAssemble(zeros(n), k_old_ele, ele_node(ele_index, 1), ele_node(ele_index, 2));
-K = SpringAssemble(K, k_new_ele, ele_node(ele_index, 1), ele_node(ele_index, 2));
+K = SpringAssemble(K, )
 
 n_spring = n_spring - new_ele_config(2);
 
