@@ -20,5 +20,8 @@ for i = 1:n
     if k_equivalent>=k_required
         break
     end
+    if n-e==0
+        break
+    end
 end
 y = [k_equivalent; e];%returning a vector of final stiffness value and the number of elements required
