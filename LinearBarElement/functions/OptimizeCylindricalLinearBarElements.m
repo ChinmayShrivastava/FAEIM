@@ -1,4 +1,4 @@
-function [K, e, E, A, L, arrangement] = OptimizeParallelLinearBarElement(F, sigmabreak, E, dimn_one_ele, l_min, u_req) %number of elements required for given arrangement
+function [K, e, E, A, L, arrangement] = OptimizeCylindricalLinearBarElements(F, sigmabreak, E, dimn_one_ele, l_min, u_req) %number of elements required for given arrangement
                                                                  %remove extra elements
                                                                  %add more
                                                                  %if
