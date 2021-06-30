@@ -6,5 +6,5 @@ l_min = 0.5;%18
 u_req = 116;%19
 
 
-[K, e, E, A, L, arrangement] = OptimizeParallelLinearBarElement(F, sigmabreak, E, dimn_one_ele, l_min, u_req);
+[K, e, E, A, L, arrangement] = OptimizeCylindricalLinearBarElements(F, sigmabreak, E, dimn_one_ele, l_min, u_req);
 %13
