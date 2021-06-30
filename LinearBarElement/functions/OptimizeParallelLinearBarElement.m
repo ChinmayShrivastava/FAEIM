@@ -1,4 +1,4 @@
-function [K, e, E, A, L] = OptimizeParallelLinearBarElement(F, sigmabreak, E, dimn_one_ele, l_min, u_req) %number of elements required for given arrangement
+function [K, e, E, A, L, arrangement] = OptimizeParallelLinearBarElement(F, sigmabreak, E, dimn_one_ele, l_min, u_req) %number of elements required for given arrangement
                                                                  %remove extra elements
                                                                  %add more
                                                                  %if
@@ -26,6 +26,11 @@ if boolean==1
         K = K+k_max;
         e = e+1;
     end
+    if e>1%21
+        arrangement = "parallel";%20
+    else
+        arrangement = "single";%23
+    end%22
 elseif boolean==0
     l_opt = E*A_max/k_req; %maximize A for better tolerance
     if l_opt<=x_lim
@@ -33,6 +38,7 @@ elseif boolean==0
         A = A_max;%9
         L = l_opt;%8
         e = 1;%3
+        arrangement = "single";%24
     elseif l_opt>x_lim
         l_opt = x_lim;
         L = l_opt;%10
@@ -41,13 +47,15 @@ elseif boolean==0
             K = E*A_opt/l_opt;
             A = A_opt;%11
             e = 1;%4
+            arrangement = "single";%25
         else
             k_min = E*A_min/l_opt;
             A = A_min;%12
-            K = k_min;%5            
+            arrangement = "series";%26
+            e = 2;
             while true
-                e = 2;
                 if k_min/e<=k_req
+                    K = k_min/e;%5   
                     break
                 else
                     e = e+1;
